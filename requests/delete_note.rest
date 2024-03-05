@@ -1,0 +1,2 @@
+DELETE /api/notes/65e756ac76ea60c4edbad3d4 HTTP/1.1
+Host: localhost:3001
