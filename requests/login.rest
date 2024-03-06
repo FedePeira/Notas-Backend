@@ -1,9 +1,8 @@
-POST /api/users HTTP/1.1
+POST /api/login HTTP/1.1
 Host: localhost:3001
 Content-Type: application/json
 
 {
  "username": "fedepeira",
- "name": "Federico Peirano",
  "password": "unicoPassword"
 }

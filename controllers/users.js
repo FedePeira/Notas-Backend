@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const logger = require('../utils/logger')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
@@ -14,7 +14,7 @@ usersRouter.post('/', async (request, response) => {
     }
 
     const saltRounds = 10
-    const passwordHash = await bcrypt.hashSync(password, saltRounds)
+    const passwordHash = await bcrypt.hash(password, saltRounds)
     logger.info('Password sin hash: ' + password)
     logger.info('Password hasheada: ' + passwordHash)
 
