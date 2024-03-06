@@ -3,6 +3,6 @@ Host: localhost:3001
 Content-Type: application/json
 
 {
-  "content": "Esta es una nota de Federico Peirano",
-  "important": false
+  "content": "Probando conexion entre el backend y el frontend",
+  "important": true
 }
