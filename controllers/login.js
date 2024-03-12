@@ -11,8 +11,6 @@ loginRouter.post('/', async (request, response) => {
 
     const user = await User.findOne({ username })
     logger.info(user)
-    logger.info(user.password)
-    logger.info(password)
 
     const passwordCorrect = user === null
         ? false
@@ -31,8 +29,7 @@ loginRouter.post('/', async (request, response) => {
 
     const token = jwt.sign(
         userForToken,
-        process.env.SECRET,
-        { expiresIn: 60*60 }
+        process.env.SECRET
     )
 
     response

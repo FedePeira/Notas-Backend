@@ -5,17 +5,21 @@ const jwt = require('jsonwebtoken')
 const logger = require('../utils/logger')
 
 const getTokenFrom = request => {
+    logger.info(request.get('authorization'))
     const authorization = request.get('authorization')
     logger.info('-------------')
     logger.info('Finding authorization...')
     logger.info(authorization)
     logger.info('-------------')
+    logger.info(authorization && authorization.startsWith('Bearer '))
     if (authorization && authorization.startsWith('Bearer ')) {
+        logger.info(authorization.replace('Bearer ', ''))
         return authorization.replace('Bearer ', '')
     }
     return null
 }
 
+/*
 const authenticateToken = (request, response, next) => {
     try {
         const token = getTokenFrom(request)
@@ -60,34 +64,34 @@ const authenticateToken = (request, response, next) => {
         return response.status(500).json({ error: 'Internal server error' })
     }
 }
+*/
 
 notesRouter.get('/', async (request, response) => {
     const notes = await Note.find({})
-    console.log('Getting data successfull')
+    logger.info('Getting data successfull')
     response.json(notes)
 })
 
 notesRouter.get('/:id', async (request, response) => {
     const note = await Note.findById(request.params.id)
     if (note) {
-        console.log(`Getting ${request.params.id} successfull`)
+        logger.info(`Getting ${request.params.id} successfull`)
         response.json(note)
     } else {
         response.status(404).end()
     }
 })
 
-notesRouter.post('/', authenticateToken, async (request, response) => {
-    console.log(request.body)
+notesRouter.post('/', async (request, response) => {
     const body = request.body
 
+    logger.info('-------------')
     logger.info('Seing body...')
     logger.info(body)
-    logger.info('-------------')
 
     logger.info('-------------')
     logger.info('Seing request authorization...')
-    logger.info(request.authorization)
+    logger.info(request.get('authorization'))
     logger.info('-------------')
 
     const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
@@ -106,7 +110,7 @@ notesRouter.post('/', authenticateToken, async (request, response) => {
     const note = new Note({
         content: body.content,
         important: body.important === undefined ? false : body.important,
-        // user: user._id
+        user: user._id
     })
 
     const savedNote = await note.save()
