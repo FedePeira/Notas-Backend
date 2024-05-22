@@ -23,7 +23,7 @@ mongoose.connect(config.MONGODB_URI)
     })
 
 const corsOptions = {
-    origin: 'https://notaspeira.netlify.app',
+    origin: ['http://localhost:5173', 'https://notaspeira.netlify.app'],
     optionsSuccessStatus: 200
 }
 
