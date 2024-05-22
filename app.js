@@ -23,7 +23,7 @@ mongoose.connect(config.MONGODB_URI)
     })
 
 const corsOptions = {
-    origin: 'https://notas-s3la.onrender.com',
+    origin: 'https://notaspeira.netlify.app',
     optionsSuccessStatus: 200
 }
 
