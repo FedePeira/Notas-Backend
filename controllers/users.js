@@ -7,7 +7,9 @@ usersRouter.post('/', async (request, response) => {
     logger.info('POST /api/users endpoint hit')
 
     const { username, name, password } = request.body
-    logger.info('Request body: ' + request.body)
+    logger.info('---------------------------')
+    logger.info('Request body: ', request.body)
+    logger.info('---------------------------')
 
     if (password.length < 3) {
         return response.status(400).json({ error: 'password too short' })
@@ -25,7 +27,7 @@ usersRouter.post('/', async (request, response) => {
     })
 
     const savedUser = await user.save()
-    logger.info('Creation user', savedUser)
+    logger.info('Creation successfull: ', savedUser)
     response.status(201).json(savedUser)
 })
 

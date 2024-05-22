@@ -67,7 +67,7 @@ const authenticateToken = (request, response, next) => {
 */
 
 notesRouter.get('/', async (request, response) => {
-    const notes = await Note.find({})
+    const notes = await Note.find({}).populate('user')
     logger.info('Getting data successfull')
     response.json(notes)
 })
